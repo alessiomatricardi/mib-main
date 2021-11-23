@@ -1,16 +1,16 @@
-[submodule "ase-hw3-api-gateway"]
-	path = ase-hw3-api-gateway
-	url = https://github.com/alessiomatricardi/ase-hw3-api-gateway.git
+[submodule "mib-api-gateway"]
+	path = mib-api-gateway
+	url = https://github.com/alessiomatricardi/mib-api-gateway.git
 
-[submodule "ase-hw3-users"]
-	path = ase-hw3-users
-	url = https://github.com/alessiomatricardi/ase-hw3-users.git
+[submodule "mib-users"]
+	path = mib-users
+	url = https://github.com/alessiomatricardi/mib-users.git
 
-[submodule "ase-hw3-messages"]
-	path = ase-hw3-messages
-	url = https://github.com/alessiomatricardi/ase-hw3-messages.git
+[submodule "mib-messages"]
+	path = mib-messages
+	url = https://github.com/alessiomatricardi/mib-messages.git
 
-[submodule "ase-hw3-blacklist"]
-	path = ase-hw3-blacklist
-	url = https://github.com/alessiomatricardi/ase-hw3-blacklist.git
+[submodule "mib-blacklist"]
+	path = mib-blacklist
+	url = https://github.com/alessiomatricardi/mib-blacklist.git
 
