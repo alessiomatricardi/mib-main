@@ -95,7 +95,7 @@ services:
     #
     # Users Microservice Migrations
     #
-    build: ./mib-user
+    build: ./mib-users
     env_file:
       - users_ms.conf
     environment:
@@ -110,7 +110,7 @@ services:
     #
     # Users Microservice Worker node
     #
-    build: ./mib-user
+    build: ./mib-users
     restart: on-failure
     env_file:
       - users_ms.conf
