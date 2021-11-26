@@ -91,21 +91,6 @@ services:
       timeout: 5s
       retries: 5
 
-  users_ms_migrations:
-    #
-    # Users Microservice Migrations
-    #
-    build: ./mib-users
-    env_file:
-      - users_ms.conf
-    environment:
-      - POSTGRES_HOST=users_ms_db
-    restart: on-failure
-    command: flask db upgrade
-    depends_on:
-      users_ms_db:
-        condition: service_healthy
-
   users_ms_worker:
     #
     # Users Microservice Worker node
@@ -119,8 +104,6 @@ services:
     depends_on:
       users_ms_db:
         condition: service_healthy
-      users_ms_migrations:
-        condition: service_started
   
   #
   # Specify here your microservices
