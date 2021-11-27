@@ -107,8 +107,44 @@ services:
   
   #
   # Specify here your microservices
-  # separating services by: db_service, migration_service, worker_service
+  # separating services by: db_service, worker_service
   #
+
+  # -------------------------------------------- #
+  # Blacklist Microservice                       #
+  # -------------------------------------------- #
+  blacklist_ms_db:
+    #
+    # Blacklist Microservice Database
+    #
+    image: library/postgres:10
+    restart: on-failure
+    env_file:
+      - blacklist_ms.conf
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  blacklist_ms_worker:
+    #
+    # Blacklist Microservice Worker node
+    #
+    build: ./mib-blacklist
+    restart: on-failure
+    env_file:
+      - blacklist_ms.conf
+    environment:
+      - POSTGRES_HOST=blacklist_ms_db
+    depends_on:
+      blacklist_ms_db:
+        condition: service_healthy
+
+#
+# Specify here your microservices
+# separating services by: db_service, migration_service, worker_service
+#
 
 volumes:
   # -------------------------------------------- #
