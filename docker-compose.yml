@@ -61,6 +61,8 @@ services:
       - gateway.conf
     environment:
       - USERS_MS_HOST=users_ms_worker
+      - BLACKLIST_MS_HOST=blacklist_ms_worker
+      - MESSAGES_MS_HOST=messages_ms_worker
     labels:
       - mib.api_gateway_worker
 
@@ -104,11 +106,8 @@ services:
     depends_on:
       users_ms_db:
         condition: service_healthy
-  
-  #
-  # Specify here your microservices
-  # separating services by: db_service, worker_service
-  #
+
+
 
   # -------------------------------------------- #
   # Blacklist Microservice                       #
@@ -141,10 +140,44 @@ services:
       blacklist_ms_db:
         condition: service_healthy
 
-#
-# Specify here your microservices
-# separating services by: db_service, migration_service, worker_service
-#
+
+
+  # -------------------------------------------- #
+  # Messages Microservice                        #
+  # -------------------------------------------- #
+  messages_ms_db:
+    #
+    # Messages Microservice Database
+    #
+    image: library/postgres:10
+    restart: on-failure
+    env_file:
+      - messages_ms.conf
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  messages_ms_worker:
+    #
+    # Messages Microservice Worker node
+    #
+    build: ./mib-messages
+    restart: on-failure
+    env_file:
+      - messages_ms.conf
+    environment:
+      - POSTGRES_HOST=messages_ms_db
+    depends_on:
+      messages_ms_db:
+        condition: service_healthy
+
+
+  #
+  # Specify here your microservices
+  # separating services by: db_service, migration_service, worker_service
+  #
 
 volumes:
   # -------------------------------------------- #
