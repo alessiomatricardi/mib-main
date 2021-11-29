@@ -4,18 +4,19 @@ This is the main repository of Message in a Bottle application, self project of 
 
 ## Team info
 
-- The *squad id* is **<squad_id>**
-- The *team leader* is <team_leader>
+- The *squad id* is **4**
+- The *team leader* is Riccardo Bonini
 
 #### Members
 
-| Name and Surname | Email |
-| ---------------- | ----- |
-|                  |       |
-|                  |       |
-|                  |       |
-|                  |       |
-|                  |       |
+| Name and Surname      | Email                            |
+| --------------------- | -------------------------------- |
+| Alessio Matricardi    | a.matricardi@studenti.unipi.it   |
+| Davide Fiorini        | d.fiorini@studenti.unipi.it      |
+| Gianmarco Manfredonia | g.manfredonia2@studenti.unipi.it |
+| Marco Parti           | m.parti@studenti.unipi.it        |
+| Riccardo Bonini       | r.bonini2@studenti.unipi.it      |
+| Riccardo Gallo        | r.gallo7@studenti.unipi.it       |
 
 ## Instructions
 
