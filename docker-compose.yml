@@ -65,6 +65,8 @@ services:
       - MESSAGES_MS_HOST=messages_ms_worker
     labels:
       - mib.api_gateway_worker
+    ports:
+      - "5000:5000"
 
   # -------------------------------------------- #
   # Common Services                              #
@@ -98,6 +100,9 @@ services:
     # Users Microservice Worker node
     #
     build: ./mib-users
+    build: 
+      context: ./mib-users
+      dockerfile: Dockerfile # file Dockerfile è stato rinominato in Dockerfile-messages
     restart: on-failure
     env_file:
       - users_ms.conf
@@ -106,7 +111,6 @@ services:
     depends_on:
       users_ms_db:
         condition: service_healthy
-
 
 
   # -------------------------------------------- #
@@ -163,7 +167,9 @@ services:
     #
     # Messages Microservice Worker node
     #
-    build: ./mib-messages
+    build: 
+      context: ./mib-messages
+      dockerfile: Dockerfile # file Dockerfile è stato rinominato in Dockerfile-messages
     restart: on-failure
     env_file:
       - messages_ms.conf
@@ -178,6 +184,36 @@ services:
   # Specify here your microservices
   # separating services by: db_service, migration_service, worker_service
   #
+
+  # -------------------------------------------- #
+  # Celery and redis                             #
+  # -------------------------------------------- #
+
+  # messages_celery:
+  #   container_name: messages_celery
+  #   build:
+  #     context: ./mib-messages
+  #     dockerfile: Dockerfile-celery
+  #   depends_on:
+  #     - redis
+  #   links:
+  #     - redis
+
+  # users_celery:
+  #   container_name: users_celery
+  #   build:
+  #     context: ./mib-users
+  #     dockerfile: Dockerfile-celery
+  #   depends_on:
+  #     - redis
+  #   links:
+  #     - redis
+
+  # redis:
+  #     container_name: redis
+  #     image: "redis:alpine"
+  #     ports:
+  #       - "6379:6379"
 
 volumes:
   # -------------------------------------------- #
