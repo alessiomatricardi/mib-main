@@ -65,6 +65,8 @@ services:
       - MESSAGES_MS_HOST=messages_ms_worker
     labels:
       - mib.api_gateway_worker
+    ports:
+      - "5000:5000"
 
   # -------------------------------------------- #
   # Common Services                              #
