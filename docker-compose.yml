@@ -65,6 +65,8 @@ services:
       - MESSAGES_MS_HOST=messages_ms_worker
     labels:
       - mib.api_gateway_worker
+    ports:
+      - "5000:5000"
 
   # -------------------------------------------- #
   # Common Services                              #
@@ -103,9 +105,13 @@ services:
       - users_ms.conf
     environment:
       - POSTGRES_HOST=users_ms_db
+      - BLACKLIST_MS_HOST=blacklist_ms_worker
+      - MESSAGES_MS_HOST=messages_ms_worker
     depends_on:
       users_ms_db:
         condition: service_healthy
+    ports:
+      - "5001:5001"
 
 
 
@@ -136,10 +142,13 @@ services:
       - blacklist_ms.conf
     environment:
       - POSTGRES_HOST=blacklist_ms_db
+      - USERS_MS_HOST=users_ms_worker
+      - MESSAGES_MS_HOST=messages_ms_worker
     depends_on:
       blacklist_ms_db:
         condition: service_healthy
-
+    ports:
+      - "5002:5002"
 
 
   # -------------------------------------------- #
@@ -169,10 +178,13 @@ services:
       - messages_ms.conf
     environment:
       - POSTGRES_HOST=messages_ms_db
+      - USERS_MS_HOST=users_ms_worker
+      - BLACKLIST_MS_HOST=blacklist_ms_worker
     depends_on:
       messages_ms_db:
         condition: service_healthy
-
+    ports:
+      - "5003:5003"
 
   #
   # Specify here your microservices
