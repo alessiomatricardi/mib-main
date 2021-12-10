@@ -5,7 +5,7 @@ This is the main repository of Message in a Bottle application, self project of 
 ## Team info
 
 - The *squad id* is **4**
-- The *team leader* is Riccardo Bonini
+- The *team leader* is Davide Fiorini
 
 #### Members
 
